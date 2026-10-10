@@ -1,0 +1,139 @@
+export const frontmatter = {
+  title: "Lighter of Lives",
+  titleAccent: "Foundation.",
+  badge: "Pro bono · Designed at no cost",
+  intro:
+    "A website for a Nigerian charity working to put out-of-school children back in the classroom. They do the real work; I designed the place where people find it.",
+  meta: [
+    { label: "Role", value: "UI/UX Designer, solo" },
+    { label: "Scope", value: "Visual identity, layout system, 5 pages" },
+    { label: "Tools", value: "Figma" },
+    { label: "Year", value: "2025" },
+  ],
+  links: [{ label: "Visit the live site", href: "http://lighteroflivesfoundation.org/" }],
+  hero: {
+    src: "/images/lighter-of-lives/home.jpg",
+    width: 2880,
+    height: 12314,
+    region: [0, 0, 2880, 1415],
+    url: "lighteroflivesfoundation.org",
+    alt: "Lighter of Lives home page: the headline Empowering Lives, Transforming Futures, a Make a Donation button, and four tall portrait slices of smiling children",
+  },
+  theme: {
+    bg: "#FBF8FC",
+    surface: "#F2EAF7",
+    text: "#1F0E33",
+    muted: "#5E5270",
+    line: "#E4D9EC",
+    accent: "#6B2BA8",
+    dark: false,
+    font: "display",
+  },
+};
+
+<Section n="01" title="The brief" headline="Every pixel in service of a *bigger mission.*">
+
+<Glance
+  items={[
+    { label: "The organisation", body: "A Nigerian charity focused on getting out-of-school children back into education." },
+    { label: "The brief", body: "A full website that builds trust, communicates the mission, and turns visits into donations and volunteers." },
+    { label: "The challenge", body: "More than 500,000 out-of-school children in Lagos State. The foundation needed a presence worthy of that urgency." },
+    { label: "My part", body: "End-to-end, solo: visual identity, layout system and all five pages, designed and delivered free of charge." },
+  ]}
+/>
+
+</Section>
+
+<Section n="02" title="First impression" headline="Feel the problem *first*, then find a way to help.">
+
+The home page had one job: make a visitor who knows nothing about the foundation feel the weight of the problem, then make it easy to do something about it. Real faces, clear numbers and a single primary action carry that, in that order.
+
+<Detail
+  src="/images/lighter-of-lives/home.jpg"
+  width={2880}
+  height={12314}
+  region={[0, 3137, 2880, 780]}
+  span="wide"
+  label="Impact, at a glance"
+  alt="About section: Together in compassion, stronger in community, beside four purple cards: 5+ schools visited, 50+ school bags, 63+ school books, 100+ lives impacted"
+  caption="Proof before persuasion: the foundation's numbers sit beside its promise, in the same purple as every call to action."
+/>
+
+<Detail
+  src="/images/lighter-of-lives/home.jpg"
+  width={2880}
+  height={12314}
+  region={[0, 4245, 2880, 1570]}
+  span="wide"
+  label="Our works"
+  alt="Our Works: three project cards with real photographs: paying school fees, school supplies, and a school-building initiative"
+  caption="Every image is a real photograph of the children and the work. Stock photography would have put distance between the visitor and the mission."
+/>
+
+</Section>
+
+<Section n="03" title="The site" headline="Five pages, *one* coherent story.">
+
+Every page opens with the same lavender hero and a single clear heading, then gets out of the way of the photographs. Visitors always know where they are, and every page ends with a way to help.
+
+<BrowserTabs
+  domain="lighteroflivesfoundation.org"
+  pages={[
+    { tab: "Home", path: "/", src: "/images/lighter-of-lives/home.jpg", width: 2880, height: 12314, alt: "Home page: hero, ambition, impact numbers, our works, photo gallery, partners, contact form and FAQ", note: "Home: the mission, the proof, and three ways to act." },
+    { tab: "About us", path: "/about", src: "/images/lighter-of-lives/about.jpg", width: 2880, height: 10702, alt: "About page: the foundation's story, purpose, mission, vision and culture, testimonials, a branded school bag, and the management team", note: "About: purpose, mission, vision and the people behind them." },
+    { tab: "Our works", path: "/works", src: "/images/lighter-of-lives/works.jpg", width: 2880, height: 6696, alt: "Our Works page: a donation campaign with a progress bar showing 45,254 naira raised of a 100,000 naira goal, and three project cards", note: "Our Works: each campaign shows exactly how far it has come." },
+    { tab: "Get involved", path: "/get-involved", src: "/images/lighter-of-lives/get-involved.jpg", width: 2880, height: 8012, alt: "Get Involved page: Donate, Volunteer, Advocate for us and Stay Connected, each with a photograph and a clear action", note: "Get Involved: three doors in, from giving to simply spreading the word." },
+    { tab: "Contact", path: "/contact", src: "/images/lighter-of-lives/contact.jpg", width: 2880, height: 6518, alt: "Contact page: address, phone and email, a contact form, and frequently asked questions", note: "Contact: every way to reach the team, and answers before they're asked." },
+  ]}
+/>
+
+<Detail
+  src="/images/lighter-of-lives/works.jpg"
+  width={2880}
+  height={6696}
+  region={[157, 1953, 2563, 1447]}
+  span="wide"
+  label="Donation transparency"
+  alt="A donation campaign card: Our Charity Supplies Books and School Bags to Schools, with 45,254 naira raised of a 100,000 naira goal, beside a photo of pupils holding up their new books"
+  caption="Progress in plain numbers, next to the children it's for. The campaign is honest about how far it still has to go."
+/>
+
+</Section>
+
+<Section n="04" title="Decisions" headline="The choices that *shaped* the site.">
+
+<Findings
+  items={[
+    {
+      title: "Purple as the emotional anchor.",
+      body: "Purple carries dignity, wisdom and compassion, the qualities the foundation stands for. Lavender tints and soft purple grounds keep it warm and approachable, never corporate.",
+    },
+    {
+      title: "Real photographs over illustration.",
+      body: "Every image shows the children, volunteers and team themselves. Real faces close the distance that stock imagery would have opened.",
+    },
+    {
+      title: "One hero pattern on every page.",
+      body: "Each page opens with the same lavender hero and large heading. The repetition is deliberate: wherever a visitor lands, they know where they are.",
+    },
+    {
+      title: "Honest about the money.",
+      body: "The Works page shows what has been raised against each goal. Donors want to know their money goes somewhere real, and honesty earns more trust than polish.",
+    },
+    {
+      title: "Three ways in, not one.",
+      body: "Not every visitor is ready to give. Donate, Volunteer and Advocate are three clear doors, and the lighter ones often lead to the deeper commitments.",
+    },
+    {
+      title: "Answers where questions happen.",
+      body: "FAQs sit on both the Home and Contact pages, catching early visitors and people about to reach out alike, so fewer questions need a reply.",
+    },
+  ]}
+/>
+
+<Statement
+  text="Designing for free for a cause you believe in is one of the purest design exercises there is: the brief is the *mission*, and every decision has to earn its place."
+  cite="Oladimeji, on the project"
+/>
+
+</Section>

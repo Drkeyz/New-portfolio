@@ -1,0 +1,96 @@
+export const frontmatter = {
+  title: "SneakerShop",
+  titleAccent: "Mobile.",
+  intro:
+    "A clean, immersive shopping app for sneaker culture, designed for discovery, product obsession, and a checkout that stays out of the way.",
+  meta: [
+    { label: "Type", value: "Design showcase" },
+    { label: "Scope", value: "Mobile app · 5 screens" },
+    { label: "Platform", value: "iOS" },
+    { label: "Year", value: "2023" },
+  ],
+  hero: {
+    src: "/images/sneakershop/cover.jpg",
+    width: 2560,
+    height: 1532,
+    alt: "SneakerShop's Explore screen on an iPhone, lying on a slate-blue textured fabric",
+  },
+  theme: {
+    bg: "#11171C",
+    surface: "#1B242B",
+    text: "#F2F4F5",
+    muted: "#98A7B3",
+    line: "#26313A",
+    accent: "#3AA6D8",
+    dark: true,
+    font: "display",
+  },
+};
+
+<Section n="01" title="The system" headline="One design language, *five* screens.">
+
+Every screen follows the same rules: clean white cards, bold product photography, a single teal call to action, and a minimal bottom nav that stays out of the way.
+
+<PhoneLineup
+  items={[
+    { src: "/images/sneakershop/explore.png", width: 1290, height: 2797, alt: "Explore: search, category chips, popular sneakers, a student discount and all sneakers", label: "Explore" },
+    { src: "/images/sneakershop/air-jordan-1.png", width: 1296, height: 2796, alt: "Product page for the Nike Air Jordan 1 at $180", label: "Air Jordan 1" },
+    { src: "/images/sneakershop/nike-free.png", width: 1296, height: 2796, alt: "Product page for the Nike Free at $80", label: "Nike Free" },
+    { src: "/images/sneakershop/air-jordan.png", width: 1296, height: 2796, alt: "Product page for the Nike Air Jordan at $320", label: "Air Jordan" },
+    { src: "/images/sneakershop/free-run.png", width: 1296, height: 2796, alt: "Product page for the Nike Free Run at $120", label: "Free Run" },
+  ]}
+/>
+
+</Section>
+
+<Section n="02" title="Explore" headline="Browse, save and buy *without leaving* the feed.">
+
+<PhoneNotes
+  screen={{ src: "/images/sneakershop/explore.png", width: 1290, height: 2797, alt: "The Explore screen, with five numbered details" }}
+  notes={[
+    { x: 49.4, y: 29, title: "Categories in one tap", body: "All Shoes, Sneakers, Slides: one row of chips, with the active one in the brand teal." },
+    { x: 13, y: 52.7, title: "A reason to look", body: "Trending and Best Seller give each card a quiet hook, set small so they never compete with the shoe." },
+    { x: 41, y: 58, title: "Save or add from the card", body: "Favourite and add-to-cart live on every card, so browsing never has to stop for buying." },
+    { x: 62, y: 69, title: "An offer that breaks the grid", body: "The discount banner is the one place a shoe escapes its frame, which is exactly why it gets noticed." },
+    { x: 50, y: 92.4, title: "Cart, one thumb away", body: "The cart floats at the centre of the bottom nav, reachable from anywhere in the app." },
+  ]}
+/>
+
+</Section>
+
+<Section n="03" title="Product" headline="The shoe is the *hero*. The interface dresses for it.">
+
+<Colourways
+  caption="Each product page takes on its sneaker's colour. The rotation ring and its handle under the shoe match the colourway, so the interface changes with the product without asking for attention."
+  items={[
+    { name: "Nike Air Jordan 1", price: "$180", colour: "#E0A33B", src: "/images/sneakershop/air-jordan-1.png", width: 1296, height: 2796, alt: "Air Jordan 1 product page: grey and orange sneaker over an orange rotation ring, colourway thumbnails, description and Add to Cart" },
+    { name: "Nike Free", price: "$80", colour: "#D3343A", src: "/images/sneakershop/nike-free.png", width: 1296, height: 2796, alt: "Nike Free product page: red running shoe over a red rotation ring" },
+    { name: "Nike Air Jordan", price: "$320", colour: "#B8402F", src: "/images/sneakershop/air-jordan.png", width: 1296, height: 2796, alt: "Air Jordan product page: red, white and black sneaker over a red rotation ring" },
+    { name: "Nike Free Run", price: "$120", colour: "#8E949C", src: "/images/sneakershop/free-run.png", width: 1296, height: 2796, alt: "Free Run product page: black running shoe over a grey rotation ring" },
+  ]}
+/>
+
+<Pair caption="The same component, two colourways: the ring, the handle and the shoe agree.">
+  <Detail
+    src="/images/sneakershop/air-jordan-1.png"
+    width={1296}
+    height={2796}
+    region={[0, 450, 1296, 990]}
+    span="wide"
+    alt="Close-up: the Air Jordan 1 floating above an orange rotation ring"
+    label="Air Jordan 1"
+  />
+  <Detail
+    src="/images/sneakershop/nike-free.png"
+    width={1296}
+    height={2796}
+    region={[0, 450, 1296, 990]}
+    span="wide"
+    alt="Close-up: the Nike Free floating above a red rotation ring"
+    label="Nike Free"
+  />
+</Pair>
+
+<Statement text="Bold product, *quiet* interface." />
+
+</Section>

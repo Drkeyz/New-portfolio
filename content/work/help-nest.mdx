@@ -1,0 +1,322 @@
+export const frontmatter = {
+  title: "Helpnest.",
+  titleAccent: "Closing the gap between bot and human.",
+  intro:
+    "An AI-native support platform that blends intelligent triage, seamless human escalation and cross-product analytics into one workspace, for B2B teams who can't choose between speed and context.",
+  meta: [
+    { label: "Role", value: "Product Designer @ Chams Access" },
+    { label: "Timeline", value: "2025 · 8 weeks" },
+    { label: "Scope", value: "User research · 30+ dashboard screens" },
+    { label: "Surfaces", value: "Admin and Super-admin web dashboards" },
+  ],
+  hero: {
+    src: "/images/helpnest/cover.png",
+    alt: "Helpnest admin dashboard: total conversations, bot resolved, satisfaction rate, escalations, response time, active chats and a seven-day conversation volume chart",
+    width: 2880,
+    height: 1787,
+    label: "Helpnest — Admin dashboard",
+    mobileCrop: true,
+  },
+  // Screen recording of the admin dashboard (no sound). Original .mov in /media-source.
+  video: {
+    src: "/video/helpnest-walkthrough.mp4",
+    embed: null,
+    captions: null,
+    title: "Helpnest dashboard walkthrough",
+    duration: "1:43",
+    width: 1540,
+    height: 1080,
+  },
+  glance: [
+    {
+      label: "The problem",
+      body: "When a bot hands a conversation to a human, the context disappears. Every escalation starts from zero.",
+    },
+    {
+      label: "The bet",
+      body: "Treat the handoff as a first-class design problem, not an afterthought, and design everything else around it.",
+    },
+    {
+      label: "My role",
+      body: "Product designer: extensive user research, then the Admin and Super-admin dashboards end to end.",
+    },
+    {
+      label: "The outcome",
+      body: "30+ dashboard screens across eight surfaces, from the live agent console to the escalation rules.",
+    },
+  ],
+  theme: {
+    bg: "#F5F8FB",
+    surface: "#EAF0F5",
+    text: "#0E1B26",
+    muted: "#4F6070",
+    line: "#DCE5ED",
+    accent: "#2F6D9B",
+    attention: "#B54708",
+    danger: "#C0322A",
+    dark: false,
+    font: "display",
+  },
+};
+
+<Section n="01" title="Context" headline="Every escalation *started from zero.*">
+
+<Lead>B2B companies running several products face a compound support problem.</Lead>
+
+Bots resolve the common questions. But the moment a conversation needs nuance, the handoff to a human erases everything before it. Agents walk into escalations blind, managers can't see which products cause the most friction, and customers feel the gap.
+
+Helpnest was designed from the ground up to close that gap, by treating the **bot-to-human transition** as the core design problem.
+
+<Statement text="The best escalation is the one the customer *never notices* has happened." cite="Design principle · Helpnest" />
+
+</Section>
+
+<Section n="02" title="Problem" headline="Five failures, *five transitions.*">
+
+<Findings
+  items={[
+    {
+      title: "Context dies at escalation.",
+      body: "When the bot hands off, the thread resets. The agent can't see what the customer already tried, what the bot explained, or how long they've waited.",
+    },
+    {
+      title: "The queue has no priority.",
+      body: "A failed payment blocking someone's pension contribution sits in the same undifferentiated queue as a routine password reset.",
+    },
+    {
+      title: "Performance is invisible.",
+      body: "Resolution rates, response times and satisfaction scores live in separate reports, if they exist at all, so managers have no unified view across products.",
+    },
+    {
+      title: "Knowledge lives outside the flow.",
+      body: "Agents switch tabs to find documentation while customers wait, which adds delay and makes answers inconsistent.",
+    },
+    {
+      title: "Escalation is reactive.",
+      body: "Conversations escalate after customers have already said they're frustrated. By then, satisfaction is gone.",
+    },
+  ]}
+/>
+
+<Lead>Each failure is a transition: bot to human, knowledge to chat, individual to team, reactive to proactive. Helpnest is designed around those transitions.</Lead>
+
+</Section>
+
+<Section n="03" title="Research" headline="Three roles, *one shared surface.*">
+
+The research covered the people on both sides of a support conversation, and the person managing everyone in it.
+
+<Columns
+  items={[
+    {
+      label: "Works the queue",
+      title: "Support agent",
+      need: "Everything I need, without switching tabs.",
+      body: "Handles live conversations across several client products. Time to first response is the main pressure, so the queue, history, knowledge base and chat must sit together.",
+    },
+    {
+      label: "Runs the team",
+      title: "Support manager",
+      need: "Data I can act on, not just dashboards.",
+      body: "Monitors team performance, configures escalation logic and reviews analytics across products, to make staffing and policy decisions quickly.",
+    },
+    {
+      label: "Asks for help",
+      title: "End customer",
+      need: "A fast answer, from whoever has it.",
+      body: "Meets Helpnest through the chat widget. The product succeeds when they don't notice the switch from bot to human.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section n="04" title="Thinking" headline="Designing for *the second* between bot and human.">
+
+<Steps
+  items={[
+    {
+      title: "Carry context forward",
+      body: "One constraint shaped everything: the handoff must carry context forward, not drop it. The agent sees the current issue, full history and activity timeline before typing a word.",
+    },
+    {
+      title: "Triage from the list",
+      body: "The queue was redesigned around priority, so agents can triage from the list without opening each conversation, which cuts first-response lag.",
+    },
+    {
+      title: "Escalate before frustration",
+      body: "Escalation rules watch for negative sentiment, repeated failed attempts and wait time, so a human steps in before the customer gives up.",
+    },
+    {
+      title: "Insights before charts",
+      body: "Analytics follow a manager's real decision loop: AI-written insights about anomalies come first, raw charts second, and everything exports to PDF, Excel or CSV.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section n="05" title="Design" headline="Eight surfaces. *One coherent workspace.*">
+
+<Sub kicker="Live agent console">Queue, context and chat, in one uninterrupted view.</Sub>
+
+The moment of handoff, designed. The conversation the agent inherits already shows the bot's attempt, when it escalated and when the agent joined.
+
+<Annotated
+  src="/images/helpnest/console.png"
+  width={1886}
+  height={959}
+  alt="Live agent console: a prioritised queue on the left, the active conversation with bot and agent messages in the centre, and quick actions below"
+  caption="The live agent console, with four annotated details."
+  notes={[
+    { x: 24.5, y: 31, title: "Triage before opening", body: "Every queued conversation shows product, wait time and a priority badge, so the urgent one is obvious from the list." },
+    { x: 58.5, y: 25, title: "The handoff, on the record", body: "The thread marks when the bot escalated and when the agent joined, and keeps the bot's messages in view." },
+    { x: 81, y: 16.4, title: "History, one tap away", body: "Wait time sits in the header, and the customer's full history opens without leaving the chat." },
+    { x: 42, y: 86, title: "Answers inside the input", body: "Canned responses, the knowledge base and file sharing live where the agent types, not in another tab." },
+  ]}
+/>
+
+<Sub kicker="Conversation history">A customer's full record, before you say hello.</Sub>
+
+<Pair caption="Every past ticket as a card with status, summary and date, then the full thread of any one of them: resolution time, messages, assigned agent and tags.">
+  <Detail
+    src="/images/helpnest/history.png"
+    width={1174}
+    height={990}
+    region={[0, 0, 1174, 990]}
+    span="wide"
+    label="History"
+    alt="Conversation history: the current issue, six past tickets as cards, and an activity timeline"
+  />
+  <Detail
+    src="/images/helpnest/ticket.png"
+    width={1175}
+    height={984}
+    region={[0, 0, 1175, 984]}
+    span="wide"
+    label="Ticket detail"
+    alt="Ticket detail: a resolved password reset with resolution time, messages exchanged, assigned agent, priority, the chat thread and tags"
+  />
+</Pair>
+
+<Sub kicker="Escalation rules">Configure the bot. Define the rules it plays by.</Sub>
+
+Proactive escalation, as settings a manager can actually reason about: how many failed attempts, how long a wait, and which signals hand the conversation to a person.
+
+<Detail
+  src="/images/helpnest/settings-escalation.png"
+  width={1175}
+  height={1462}
+  region={[240, 40, 900, 545]}
+  span="mid"
+  label="Smart escalation"
+  alt="Escalation rules: auto-escalate after 3 failed attempts or 10 minutes, with triggers for negative sentiment, requests for a human, complex technical queries and after-hours"
+  caption="Sentiment and explicit requests escalate immediately; complex queries and after-hours messages queue for the next available agent."
+/>
+
+<Sub kicker="For managers">The rest of the workspace.</Sub>
+
+Inbox, analytics, knowledge base, staff and settings share one layout, one stat-row pattern and one set of status badges, so moving between them never means relearning.
+
+<ScreenTabs
+  items={[
+    {
+      tab: "Inbox",
+      src: "/images/helpnest/inbox.png",
+      width: 1886,
+      height: 1517,
+      alt: "Conversations inbox: daily totals, active, resolved, escalated and helpfulness, with All, Active, Resolved and Escalated tabs and a list of conversations",
+      notes: [
+        { x: 44, y: 17, title: "An operational read first", body: "Five numbers summarise the day before any thread is opened." },
+        { x: 30, y: 30, title: "Four tabs, one inbox", body: "All, Active, Resolved and Escalated filter the same list, each with a count." },
+      ],
+    },
+    {
+      tab: "Analytics",
+      src: "/images/helpnest/analytics.png",
+      width: 1886,
+      height: 2053,
+      alt: "Analytics and reports: AI-powered insights, four headline metrics, response time trend, ticket volume by day, query distribution and satisfaction trend",
+      notes: [
+        { x: 22, y: 14, title: "Insights lead", body: "AI-written observations about anomalies sit above the charts, so managers read the story before the data." },
+        { x: 22, y: 31, title: "Four headline metrics", body: "Resolution, first-contact resolution, handling time and satisfaction, each with its trend." },
+      ],
+    },
+    {
+      tab: "Knowledge base",
+      src: "/images/helpnest/knowledge.png",
+      width: 1886,
+      height: 1646,
+      alt: "Knowledge base: total documents, storage used, categories, upload, and a table of documents with category, size, date and owner",
+      notes: [
+        { x: 22, y: 14, title: "Trains the bot, arms the agent", body: "The same documents the AI answers from are the ones agents reach from the chat input." },
+      ],
+    },
+    {
+      tab: "Staff",
+      src: "/images/helpnest/staff.png",
+      width: 1886,
+      height: 1341,
+      alt: "Staff management: team totals, a roster with roles, join dates and tickets resolved, and a performance leaderboard",
+      notes: [
+        { x: 22, y: 15, title: "Visible, not punitive", body: "Resolution rate, response time and satisfaction per agent, framed as a tool to improve, not to surveil." },
+      ],
+    },
+    {
+      tab: "Settings",
+      src: "/images/helpnest/settings-general.png",
+      width: 1175,
+      height: 1529,
+      alt: "General settings: chatbot name, default language, business hours and what happens outside them",
+      notes: [
+        { x: 30, y: 20, title: "The bot, named and scoped", body: "Name, languages and business hours, with a clear choice for what the bot does after hours." },
+      ],
+    },
+  ]}
+/>
+
+<Sub kicker="Design system">Calm authority, legible under pressure.</Sub>
+
+<DesignSystem
+  font={{ name: "Segoe UI", spec: "Display · 400 weight · readable in under a second" }}
+  note="Support agents work at speed, so every label, status and action has to read at a glance. One calm blue carries actions and data; amber and red are kept for what needs attention."
+  actions={["Resolve", "View History"]}
+  palette={[
+    { name: "Primary", hex: "#2F6D9B", role: "Actions, data" },
+    { name: "Background", hex: "#FFFFFF", role: "Page" },
+    { name: "Amber", hex: "#F79009", role: "Attention, medium priority" },
+    { name: "Red", hex: "#F04438", role: "High priority, failure" },
+  ]}
+  chips={[
+    { label: "Resolved", tone: "ok" },
+    { label: "Medium", tone: "attention" },
+    { label: "High", tone: "danger" },
+  ]}
+/>
+
+</Section>
+
+<Section n="06" title="Outcome" headline="What *shipped.*">
+
+<Metrics
+  items={[
+    {
+      value: 30,
+      suffix: "+",
+      title: "Dashboard screens",
+      label: "From the main dashboard and live agent console through history, inbox, analytics, knowledge base, staff and settings.",
+    },
+    {
+      value: 2,
+      title: "Views, one system",
+      label: "Admin and Super-admin dashboards, sharing one layout, stat-row pattern and badge language.",
+    },
+    {
+      value: 8,
+      title: "Surfaces, one workspace",
+      label: "Every surface an agent or manager needs, arranged so the bot-to-human handoff never loses context.",
+    },
+  ]}
+/>
+
+</Section>

@@ -1,0 +1,269 @@
+export const frontmatter = {
+  title: "Orgsphere.",
+  titleAccent: "Designed with intention, built for people.",
+  intro:
+    "A mobile HR platform that gives employees self-service for leave, expenses, performance reviews and company activities, from one app instead of a stack of paper.",
+  meta: [
+    { label: "Role", value: "Product Designer @ Chams Access" },
+    { label: "Year", value: "2025" },
+    { label: "Scope", value: "5 core modules · 40+ screens · design system" },
+    { label: "Audience", value: "3 user roles, one application" },
+  ],
+  hero: {
+    src: "/images/orgsphere/cover.png",
+    alt: "Orgsphere: an activities list, the employee home with today's overview and recent leave requests, and all leaves, on a dark puzzle-pattern background",
+    width: 2880,
+    height: 1787,
+    label: "Orgsphere — mobile screens",
+  },
+  // Screen recording of the employee app (no sound). Original .mov in /media-source.
+  video: {
+    src: "/video/orgsphere-walkthrough.mp4",
+    embed: null,
+    captions: null,
+    title: "Orgsphere app walkthrough",
+    duration: "1:56",
+    width: 828,
+    height: 1792,
+  },
+  glance: [
+    {
+      label: "The problem",
+      body: "Leave lived in emails, expenses travelled on paper, and reviews surfaced once a year, opaque and disconnected from the work.",
+    },
+    {
+      label: "The bet",
+      body: "One pattern, learned once: if leave works a certain way, expenses and KPIs should work the same way.",
+    },
+    {
+      label: "My role",
+      body: "Product designer: research, information architecture, wireframes, visual design, prototyping and developer handoff.",
+    },
+    {
+      label: "The outcome",
+      body: "Five modules unified in one app, three roles served, 40+ production screens from a single component library.",
+    },
+  ],
+  theme: {
+    bg: "#F6FAF7",
+    surface: "#E5F2EA",
+    text: "#0F1F16",
+    muted: "#4E6357",
+    line: "#D5E5DB",
+    accent: "#08783D",
+    attention: "#B54708",
+    danger: "#C0322A",
+    dark: false,
+    font: "display",
+  },
+};
+
+<Section n="01" title="Context" headline="From paper-heavy HR *to a single app.*">
+
+<Lead>The brief: replace fragmented, paper-heavy HR processes with a modern workspace that puts employees in control of their working lives.</Lead>
+
+Leave requests lived in emails. Expense claims travelled on paper. Performance reviews surfaced once a year, opaque and disconnected from day-to-day work. Company events had no central home, and turnout suffered for it.
+
+The opportunity was a **single mobile app** for all of it. Not enterprise software wearing a friendly face, but a workspace built around the employee first, with managers and HR served by the same shared logic.
+
+</Section>
+
+<Section n="02" title="Problem" headline="Four broken patterns. *Four direct fixes.*">
+
+<Findings
+  items={[
+    {
+      title: "Requests ran on email and paper.",
+      body: "Fix: one app where employees apply for leave, submit expenses, track balances and see the approval chain instantly.",
+    },
+    {
+      title: "No visibility into status.",
+      body: "Employees had to chase HR and managers in person. Fix: real-time status tracking, with a notification at every approval milestone.",
+    },
+    {
+      title: "Performance reviews were opaque.",
+      body: "No way to track KPIs or see feedback as it happened. Fix: a transparent KPI module with quarterly goals, self-ratings, manager scores and comment threads.",
+    },
+    {
+      title: "Activities had no home.",
+      body: "Events and training were scattered, so attendance was low. Fix: an activities hub with details, venues and notes in one place.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section n="03" title="Research" headline="One app, *three* distinct lenses.">
+
+Stakeholder interviews with HR leads at Chams Access, employee surveys, and an audit of HR apps such as BambooHR and Keka. Three groups use the app, each with different goals, so the design shares one set of patterns but tunes density, primary actions and approval flows per role.
+
+<Columns
+  items={[
+    {
+      label: "Primary user · ~70% of traffic",
+      title: "Employees",
+      need: "Know where every request stands, without asking.",
+      body: "Apply for leave, submit expenses, track KPIs and stay informed about company events. Self-service and transparency first.",
+    },
+    {
+      label: "Approvers · tier 1",
+      title: "Line managers",
+      need: "See what's waiting, approve in one tap.",
+      body: "Review leave and expense requests, score direct reports on KPIs and give feedback, from an at-a-glance pending queue.",
+    },
+    {
+      label: "Approvers · tier 2",
+      title: "HR administrators",
+      need: "The whole organisation, not just one team.",
+      body: "Final-tier approvals, oversight of review cycles, and employee records across every department.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section n="04" title="Thinking" headline="Learn one module, *know them all.*">
+
+Five stages, each validating the last before the next began: research, information architecture for the leave, expense, KPI and activity flows, low-fidelity wireframes tested internally, high-fidelity design, then interactive prototypes and an annotated developer handoff.
+
+The principle that shaped every screen came out of the architecture stage.
+
+<Statement
+  text="Once you learn how leave works, you *already know* how expenses work. The same pattern carries you through every module."
+  cite="Core design principle · consistency first"
+/>
+
+</Section>
+
+<Section n="05" title="Design" headline="Every module, *the same shape.*">
+
+<Sub kicker="Onboarding">Three steps. No friction.</Sub>
+
+A three-step walkthrough introduces the product before sign-in. Each slide pairs one value proposition with a real preview of the app, so people see what they're getting before they're asked to log in. Credentials are provisioned by the employer, so there's no sign-up form at all.
+
+<PhoneLineup
+  items={[
+    { src: "/images/orgsphere/onboard-1.png", width: 694, height: 1494, alt: "Onboarding step one: a preview of the employee home", label: "Your workday" },
+    { src: "/images/orgsphere/onboard-2.png", width: 693, height: 1493, alt: "Onboarding step two: a preview of all leaves", label: "Your leave" },
+    { src: "/images/orgsphere/onboard-3.png", width: 688, height: 1485, alt: "Onboarding step three: a preview of performance management, with Proceed to Sign in", label: "Your performance" },
+  ]}
+/>
+
+<Sub kicker="Home">An instant snapshot of the workday.</Sub>
+
+<PhoneNotes
+  screen={{ src: "/images/orgsphere/home.png", width: 611, height: 1733, alt: "Employee home: greeting, today's overview, recent leave requests and activities" }}
+  notes={[
+    { x: 9, y: 4, title: "A personal greeting", body: "A small human touch that makes an HR tool feel like a workspace, not a form." },
+    { x: 31, y: 21, title: "Four numbers that matter", body: "Leave balance, expense requests, training and appraisal progress, readable before scrolling." },
+    { x: 83, y: 40, title: "Status at a glance", body: "Recent requests show their status inline, so nobody has to open them to know where they stand." },
+    { x: 83, y: 67, title: "What's coming up", body: "Upcoming and completed company events, with who's attending, right on the home screen." },
+  ]}
+/>
+
+<Sub kicker="Leave">Multi-level approvals, all in real time.</Sub>
+
+<PhoneNotes
+  flip
+  screen={{ src: "/images/orgsphere/leave-detail.png", width: 460, height: 990, alt: "Leave request details: leave type, dates, status, reason, and the approval chain from line manager to HR" }}
+  notes={[
+    { x: 73, y: 28.3, title: "Status, never colour alone", body: "Approved, pending and cancelled each read as a labelled badge, in semantic colour." },
+    { x: 4, y: 50.5, title: "The whole chain, visible", body: "Line manager first, then HR, each with its own status and comment. The email back-and-forth becomes one screen." },
+    { x: 74, y: 88.2, title: "Allocation, confirmed", body: "HR's approval shows the days actually allocated, so there's no surprise later." },
+  ]}
+/>
+
+<Sub kicker="Expense">The same pattern, in a different module.</Sub>
+
+Expenses follow leave exactly: summary cards on top, filter tabs below, then requests with their details. Drag to compare. Anyone who has applied for leave already knows how to claim an expense.
+
+<ComparisonSlider
+  span="mid"
+  maxWidth={420}
+  labels="below"
+  label="Leave and Expense, the same structure"
+  beforeLabel="Leave"
+  afterLabel="Expense"
+  before={<Media media={{ src: "/images/orgsphere/leave-all.png", alt: "All leaves: four summary cards, filter tabs, and leave requests", width: 457, height: 985, label: "Leave" }} sizes="420px" bg="#FFFFFF" />}
+  after={<Media media={{ src: "/images/orgsphere/expense-all.png", alt: "Expense management: four summary cards, filter tabs, and expense requests", width: 515, height: 1114, label: "Expense" }} sizes="420px" bg="#FFFFFF" />}
+/>
+
+<Sub kicker="Performance">Quarterly KPIs, made transparent.</Sub>
+
+Employees self-assess, see their manager's scores and track progress across the year. The flow moves through four states: every quarter at a glance, the review split into objectives and skills (weighted 80/20), a one-to-five rating, and the completed review with comments from both sides.
+
+<PhoneLineup
+  items={[
+    { src: "/images/orgsphere/kpi-all.png", width: 589, height: 1276, alt: "All KPIs: quarters with progress, due dates, and Complete KPI", label: "All KPIs" },
+    { src: "/images/orgsphere/kpi-details.png", width: 589, height: 1276, alt: "Quality performance review: Section A and B, objectives 80% and skills and attitude 20%", label: "KPI details" },
+    { src: "/images/orgsphere/kpi-skills.png", width: 590, height: 1276, alt: "Section B: star ratings for knowledge of work and personal development", label: "Skills rating" },
+    { src: "/images/orgsphere/kpi-review.png", width: 589, height: 1276, alt: "Completed review: score summary and manager's score", label: "Completed review" },
+  ]}
+/>
+
+<Sub kicker="Activities">Never miss what matters.</Sub>
+
+Events and training are categorised with icons for quick scanning. Each event has its venue, time and important notes on one screen, and notifications use type-specific icons with mark-all-read and an unread count.
+
+<PhoneLineup
+  items={[
+    { src: "/images/orgsphere/activities.png", width: 587, height: 1275, alt: "Activities: book reviews and football matches, virtual or physical, with dates", label: "Activities" },
+    { src: "/images/orgsphere/notifications.png", width: 589, height: 1275, alt: "Notifications: mark all read, all and unread tabs, and type-specific notifications", label: "Notifications" },
+  ]}
+/>
+
+<Sub kicker="Design system">A system that reads at a glance.</Sub>
+
+<DesignSystem
+  font={{ name: "Satoshi", spec: "Clean · legible · mobile first · 8pt grid" }}
+  note="Card-based UI with subtle shadows, pill badges and rounded actions on an 8 / 16 / 24pt rhythm. Summary first, detail on tap; the green action always sits in the same place."
+  palette={[
+    { name: "Primary", hex: "#08783D", role: "Actions, approved" },
+    { name: "Accent", hex: "#E5F8EE", role: "Surfaces, highlights" },
+    { name: "Warning", hex: "#B54708", role: "Attention, pending" },
+    { name: "Destructive", hex: "#F04438", role: "Cancelled, delete" },
+  ]}
+  actions={["Submit Request", "Cancel"]}
+  chips={[
+    { label: "Approved", tone: "ok" },
+    { label: "Pending", tone: "attention" },
+    { label: "Cancelled", tone: "danger" },
+  ]}
+/>
+
+<Figure
+  span="bleed"
+  src="/images/orgsphere/more-screens.jpg"
+  width={3562}
+  height={1916}
+  alt="More Orgsphere screens: forgotten password, verification code, all leaves, expense management, profile, quality performance review, section A objectives, performance scores and personal details"
+  caption="Password recovery, verification, profile, settings and every secondary surface, from the same component library."
+/>
+
+</Section>
+
+<Section n="06" title="Outcome" headline="What *shipped.*">
+
+<Metrics
+  items={[
+    {
+      value: 5,
+      suffix: "×",
+      title: "Modules unified",
+      label: "Onboarding, Leave, Expense, Performance and Activities, in one app, from one component library.",
+    },
+    {
+      value: "3/3",
+      title: "User roles served",
+      label: "Employees, line managers and HR administrators: shared base patterns, role-tuned approvals and density.",
+    },
+    {
+      value: 40,
+      suffix: "+",
+      title: "Production screens",
+      label: "Primary flows, edge states such as password recovery and empty states, and the full profile and settings surface.",
+    },
+  ]}
+/>
+
+</Section>

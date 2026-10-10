@@ -1,0 +1,471 @@
+export const frontmatter = {
+  title: "Juncta.",
+  titleAccent: "Where liquidity never sleeps.",
+  intro:
+    "A DLMM liquidity market maker with a lending protocol built in. Every idle dollar in the DEX earns yield in the lending market, without the user routing it there.",
+  meta: [
+    { label: "Role", value: "Lead Product Designer" },
+    { label: "Timeline", value: "June–September 2026 · 17 weeks" },
+    { label: "Scope", value: "UX research, 35 dashboard screens, full design system" },
+    { label: "Chain", value: "Designed for Cedra (Move L1), now live on Solana devnet" },
+  ],
+  caption:
+    "Juncta was designed for Cedra and has since moved to Solana. The design system and core flows carried over across chains.",
+  hero: {
+    src: "/images/juncta/pools.png",
+    alt: "Juncta pools dashboard: total value locked, lending supplied, 24-hour volume, a top pools table with active bins, a protocol overview and recent activity",
+    width: 2880,
+    height: 1726,
+    label: "Juncta — Pools dashboard",
+    mobileCrop: true,
+  },
+  // Walkthrough (screen recording, no sound). Converted from the .mov in /media-source with
+  // `avconvert -p PresetAppleM4V1080pHD`, which writes H.264 with fast start.
+  video: {
+    src: "/video/juncta-walkthrough.mp4",
+    embed: null,
+    captions: null,
+    title: "Juncta walkthrough",
+    duration: "1:08",
+    width: 3078,
+    height: 2100,
+  },
+  glance: [
+    {
+      label: "The problem",
+      body: "Every Move DEX was copying the Uniswap V3 playbook. In an average week, $542M of liquidity sits out of range, earning nothing.",
+    },
+    {
+      label: "The bet",
+      body: "Build on DLMM. A protocol that knows which price bin is active can lend out the capital that isn't working.",
+    },
+    {
+      label: "My role",
+      body: "Lead product designer across research, product design and the design system, over 17 weeks.",
+    },
+    {
+      label: "The outcome",
+      body: "35 production-ready screens, a full design system, and the first DLMM designed for a Move chain.",
+    },
+  ],
+  theme: {
+    bg: "#07090D",
+    surface: "#171C26",
+    text: "#F5F5F2",
+    muted: "#8B929E",
+    line: "#262D3A",
+    accent: "#17CFAA",
+    attention: "#F79009",
+    danger: "#F04438",
+    lend: "#4C8DFF",
+    dark: true,
+    font: "grotesk",
+  },
+};
+
+<Section n="01" title="Context" headline="A protocol where *capital never sits* idle.">
+
+<Lead>Every Move-based DEX launching was a concentrated liquidity market maker: a port of the Uniswap V3 playbook.</Lead>
+
+LPs set static price ranges, wait, and watch their capital sit idle the moment price drifts outside them. The architecture has no idea which bins are working and which aren't.
+
+Juncta went **DLMM** instead, for architectural reasons rather than cosmetic ones. Liquidity lives in discrete price bins, and the protocol knows which bin is active at every moment. That awareness is what makes the core mechanic clean: liquidity in inactive bins is routed into the lending market automatically.
+
+<BinDiagram />
+
+</Section>
+
+<Section n="02" title="Problem" headline="Make six yield states feel like a *savings account.*">
+
+<Lead>Make a protocol with six simultaneous yield states per position feel as simple as a savings account, so a first-time LP can use it without losing money.</Lead>
+
+Every screen had to translate a deeply technical engine into something a newcomer could trust, without hiding what a professional needs to see.
+
+<StatRow source="Dune, 26 weekly snapshots, 7 chains, Jan–Jun 2026.">
+  <Stat value={542000000} prefix="$">sits out of range in an average week, industry-wide.</Stat>
+  <Stat value={36.7} decimals={1} suffix="%">of that liquidity goes untouched for 90+ days.</Stat>
+</StatRow>
+
+</Section>
+
+<Section n="03" title="Research" headline="Five structural issues, *validated* before they became design decisions.">
+
+<Findings
+  items={[
+    {
+      title: "Passive LPs consistently lose.",
+      body: "Once impermanent loss and missed rebalancing are priced in, the average retail LP underperforms simply holding the tokens. Concentrated liquidity has become an institutional product wearing retail clothing.",
+    },
+    {
+      title: "DEX liquidity and lending are disconnected.",
+      body: "LP capital and lending deposits live in separate pools with no relationship to each other, so LP capital sits idle when it's inactive. Nobody had brought unified liquidity to a Move chain.",
+    },
+    {
+      title: "Impermanent loss is treated as inevitable.",
+      body: "Every AMM design treats IL as the cost of providing liquidity. No protocol had built IL mitigation into its core fee economics instead of leaving it as the LP's problem.",
+    },
+    {
+      title: "Lending parameters adapt too slowly.",
+      body: "Aave and Compound use static utilisation curves that only change through slow governance. No lending market adapts continuously to live on-chain conditions.",
+    },
+    {
+      title: "Collateral sits idle.",
+      body: "When a trader or borrower deposits margin, that capital earns nothing while it waits. Pure capital inefficiency that no protocol had resolved at the protocol level.",
+    },
+  ]}
+/>
+
+<Lead>Juncta's answer to all five: one protocol where the DLMM and the lending market share a single liquidity layer, and capital moves between them on its own.</Lead>
+
+<Sub kicker="Who it's for">Three users, three different reasons to trust it.</Sub>
+
+<Columns
+  items={[
+    {
+      label: "User 01",
+      title: "Passive LP",
+      need: "Yield, not a second job.",
+      body: "Deposits once, and expects the protocol to rebalance and route idle capital automatically.",
+    },
+    {
+      label: "User 02",
+      title: "Active / Pro LP",
+      need: "Control and live data.",
+      body: "Manages positions across bins directly. Needs real-time bin state and fine-grained controls.",
+    },
+    {
+      label: "User 03",
+      title: "Borrower",
+      need: "Liquidity without unwinding a position.",
+      body: "Borrows against an LP position as collateral, instead of exiting it to raise cash.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section n="04" title="Thinking" headline="How the problem became *this specific* solution.">
+
+The three-layer architecture wasn't the first idea. It's what survived testing two liquidity models, and cutting a version that showed users too much.
+
+<Steps
+  items={[
+    {
+      title: "Mapped where capital actually sits idle",
+      body: "Traced a position through both the DEX and the lending market and found two silos that never talk. The DEX knows a bin is inactive; the lending market has no idea.",
+    },
+    {
+      title: "Tested static range against DLMM, head to head",
+      body: "Static range was simpler to build and explain, but couldn't tell the lending layer which capital was actually idle. DLMM's bin-level tracking could. That data decided it, not visual preference.",
+    },
+    {
+      title: "Found the gap wasn't a missing feature",
+      body: "The DEX already knew which capital wasn't earning fees. The fix was routing that signal to the lending layer, not inventing a new primitive.",
+    },
+  ]}
+/>
+
+<Statement text="The fix wasn't a new feature. It was *routing a signal* the protocol already had." />
+
+</Section>
+
+<Section n="05" title="Design" headline="Making a *three-layered protocol* feel like one product.">
+
+Juncta's edge is tying three layers that update at the same time into a single surface, so the user never has to connect what the protocol is already doing.
+
+<Layers
+  items={[
+    {
+      name: "DLMM",
+      title: "Concentrated liquidity, in discrete bins.",
+      body: "The protocol tracks exactly which price bin is active at every moment. No static range, no guessing.",
+    },
+    {
+      name: "Debt",
+      title: "Lending that reacts to the DEX in real time.",
+      body: "Idle capital on either side of a position is automatically eligible as lending collateral.",
+    },
+    {
+      name: "Signal",
+      title: "Rebalancing logic the user never has to trigger.",
+      body: "The layer that decides when a position needs attention, before the user has to notice.",
+    },
+  ]}
+/>
+
+<Sub kicker="Pools">The whole protocol, at a glance.</Sub>
+
+<Annotated
+  src="/images/juncta/pools.png"
+  width={2880}
+  height={1726}
+  alt="Juncta pools dashboard"
+  caption="The pools dashboard, with four annotated details."
+  notes={[
+    {
+      x: 49.5,
+      y: 10.8,
+      title: "Both halves, one row",
+      body: "TVL, lending supplied, volume and fees sit side by side, so the DEX and the lending market read as one market.",
+    },
+    {
+      x: 56.3,
+      y: 31.7,
+      title: "Active bins, number first",
+      body: "The share of a pool's liquidity earning right now. 82% reads green and 35% red, but the number is always there, so colour never carries it alone.",
+    },
+    {
+      x: 75.9,
+      y: 39,
+      title: "One liquidity layer",
+      body: "DLMM TVL and lending supply in a single chart. Trading fees and lending yield add up to one combined APY.",
+    },
+    {
+      x: 74.75,
+      y: 65.3,
+      title: "The engine, made visible",
+      body: "Rebalances, graduations and bins moving into lending appear as they happen, so automation never feels like a black box.",
+    },
+  ]}
+/>
+
+<Sub kicker="New pool">Define the pool, then seed it.</Sub>
+
+Creating a pool and providing its first liquidity are two decisions, so they're two steps on one screen. The step you're not on stays visible but dimmed, so the whole flow is always in view.
+
+<ScreenTabs
+  items={[
+    {
+      tab: "Define the pool",
+      src: "/images/juncta/new-pool-step-1.png",
+      width: 2880,
+      height: 2790,
+      alt: "New pool, step one: base and quote token, base fee, bin step, initial price with the estimated market price, and a fee summary. The initial position panel is dimmed.",
+      notes: [
+        { x: 1.6, y: 40.3, title: "A starting price, suggested", body: "The initial price shows the estimated market price underneath, so a new pool doesn't open mispriced." },
+        { x: 48.6, y: 41.8, title: "The economics, up front", body: "Base fee, the fee ceiling at peak volatility, bin step, the LP share of fees and IL compensation, before anything is created." },
+        { x: 74, y: 50, title: "One step at a time", body: "Seeding the pool waits, dimmed, until the pool is defined." },
+      ],
+    },
+    {
+      tab: "Seed the first position",
+      src: "/images/juncta/new-pool-step-2.png",
+      width: 2880,
+      height: 2790,
+      alt: "New pool, step two: distribution strategy with impermanent-loss labels, live bin distribution preview, deposit, price range, liquidity slippage, adaptive mode and a deposit summary. The pool panel is dimmed.",
+      notes: [
+        { x: 50.9, y: 13.2, title: "Risk on the label", body: "Every distribution strategy shows its impermanent-loss risk next to its name, before anyone deposits." },
+        { x: 50.9, y: 24, title: "See the shape you're making", body: "A live preview of how the deposit spreads across bins, with the active bin marked." },
+        { x: 50.9, y: 48.8, title: "Range, relative to price", body: "Min and max price show how far they sit from the current price, and how many bins the range covers." },
+        { x: 50.9, y: 79.7, title: "Yield before you commit", body: "Deposit value, projected APY and daily yield update before Add Liquidity." },
+      ],
+    },
+  ]}
+/>
+
+<Sub kicker="Swap">Every hop, accounted for.</Sub>
+
+A swap can route through several pools. Instead of hiding the route, the confirmation breaks it down hop by hop: each pool's type, fee and active bin, what went in, what came out, and the price impact at every step.
+
+<Figure
+  span="mid"
+  src="/images/juncta/swap-complete.png"
+  width={2880}
+  height={2186}
+  alt="Swap complete: 5,000 NEWTKN paid, 824.30 USDC received, 2.1% total price impact, and a route breakdown across NEWTKN/CED, CED/USDT and USDT/USDC with the fee and impact of each hop"
+  caption="A three-hop route from NEWTKN to USDC, with fees and impact reported per pool and in total."
+/>
+
+Settings speak in consequences, not just numbers. Slippage says exactly what happens at the chosen tolerance, and Auto shows the tolerance it picks for each route length. Expiry explains its own trade-off: more time to sign means more price risk.
+
+<Row
+  items={[
+    {
+      src: "/images/juncta/swap-expiry.png",
+      width: 1519,
+      height: 1327,
+      alt: "Transaction expiry modal: presets of 5, 10, 20 and 30 minutes, a custom field, when the intent expires, and the note that longer means more signing time and more price risk",
+      caption: "Expiry, with its trade-off spelled out.",
+    },
+    {
+      src: "/images/juncta/swap-slippage.png",
+      width: 1519,
+      height: 1584,
+      alt: "Slippage tolerance modal at 0.1%: the transaction reverts if price moves more than this, with expected output, minimum received, max slippage loss and price impact",
+      caption: "Slippage at 0.1%: what reverts, and the minimum you'll receive.",
+    },
+    {
+      src: "/images/juncta/swap-slippage-auto.png",
+      width: 1519,
+      height: 1925,
+      alt: "Slippage tolerance on Auto: 0.3% for a direct route, 0.6% for two hops, 1.0% for three hops, with 1.0% applied for the current three-hop route",
+      caption: "Auto, set by route length: 1.0% for this three-hop route.",
+    },
+  ]}
+/>
+
+<Sub kicker="Provide liquidity">Same deposit, two strategies.</Sub>
+
+Spot concentrates liquidity around the active bin. Wide spreads it across a broad range, with lower impermanent-loss risk.
+
+<Figure
+  src="/images/juncta/provide-liquidity-spot.png"
+  width={2880}
+  height={2380}
+  alt="Provide liquidity: pool, distribution strategy, deposit amounts and bin range on the left; live bin state, pool APY breakdown and position preview on the right"
+  caption="Provide liquidity. Strategy and range on the left, consequences on the right, updating as the user changes them."
+/>
+
+The live bin state is where the strategy becomes visible. With Spot, liquidity crowds the active bin and earns more in fees. With Wide, more bins sit away from price, and those are lent out (blue) instead of left idle. Yield is broken into trading fees and lending yield before it's combined, so the user knows where the number comes from.
+
+<ComparisonSlider
+  span="mid"
+  stroke="var(--cs-accent)"
+  radius={16}
+  labels="below"
+  label="Live bin state, Spot vs Wide"
+  beforeLabel="Spot"
+  afterLabel="Wide"
+  before={<Crop src="/images/juncta/provide-liquidity-spot.png" width={2880} height={2380} region={[1460, 186, 1368, 890]} column={1060} alt="Spot strategy: bins concentrated around the active bin; trading fees 10.8%, lending yield 3.4%, combined APY 14.2%" />}
+  after={<Crop src="/images/juncta/provide-liquidity-wide.png" width={2880} height={2380} region={[1460, 186, 1368, 890]} column={1060} alt="Wide strategy: bins spread across the range with outer bins lent out; trading fees 6.2%, lending yield 2.0%, combined APY 8.2%" />}
+/>
+
+<Sub kicker="Borrow">Borrowing that grows with the user's position.</Sub>
+
+Two states of the same surface. A first-time borrower is asked how they'd like to start, and can deposit collateral directly, with no LP position needed. Someone with an active position sees the lending market beside their account: health factor, borrow power, active borrows and LP collateral, in one view.
+
+<ComparisonSlider
+  label="Borrow"
+  labels="below"
+  beforeLabel="First-time borrower"
+  afterLabel="Active position"
+  before={<Media media={{ src: "/images/juncta/borrow-start.png", alt: "Borrow screen for a first-time borrower: accepted collateral, four ways to start, the borrow panel and liquidation stages", width: 2880, height: 2109, label: "Borrow — first-time borrower" }} sizes="(min-width: 1360px) 1280px, 100vw" bg="#171C26" />}
+  after={<Media media={{ src: "/images/juncta/borrow-active.png", alt: "Borrow screen with an active position: the lending market table beside the account's health factor, borrow power, active borrows and LP collateral", width: 2880, height: 2109, label: "Borrow — active position" }} sizes="(min-width: 1360px) 1280px, 100vw" bg="#171C26" />}
+/>
+
+<Figure
+  src="/images/juncta/borrow-collateral.png"
+  width={2880}
+  height={2109}
+  alt="Depositing collateral: choose a collateral asset with its collateral factor, select an asset to borrow, and see the effective collateral value and safe leverage"
+  caption="Collateral, explained rather than just accepted. Each asset shows its collateral factor and the haircut behind it, and the borrow panel shows the net cost once idle-bin earnings are counted."
+/>
+
+<Sub kicker="Liquidation">Four stages, designed by hand.</Sub>
+
+Liquidation is where users lose money, so it's where vagueness costs the most. Each stage has an explicit threshold, so users can see what will trigger each action before it happens.
+
+<Stages
+  items={[
+    { name: "Healthy", range: "> 1.2", tone: "ok", note: "No action taken." },
+    { name: "Soft", range: "1.1 – 1.2", tone: "attention", note: "10% of collateral de-risked per block." },
+    { name: "Accelerate", range: "1.0 – 1.1", tone: "danger", note: "25% converted per block." },
+    { name: "Full", range: "< 1.0", tone: "critical", note: "3% penalty, 30% to the insurance pool." },
+  ]}
+/>
+
+<Sub kicker="Portfolio">Everything a position is doing, in one scroll.</Sub>
+
+Trading fees, lending yield and borrow cost are reported separately, then reconciled, so an LP can see exactly where their return comes from and what each position is doing.
+
+<ScrollPan
+  src="/images/juncta/portfolio.png"
+  width={2880}
+  height={5066}
+  alt="Juncta portfolio: net worth, wallet tokens, LP positions, borrowed and yield earned; trading fees, lending yield and net borrow cost; performance chart, allocation, P&L summary, token holdings, recent activity, LP positions with bin ranges, and the borrow position with its health factor"
+  caption="The full portfolio screen, top to bottom."
+/>
+
+<Sub kicker="Design system">Built for dense data, dark rooms, and long sessions.</Sub>
+
+Every tabular layout had to stay legible at 12px, and every chart had to read at a glance. The palette is deliberately narrow, because in a product about money, colour is a signal.
+
+<DesignSystem
+  font={{ name: "Space Grotesk", spec: "Display · 500 weight · −1.5% tracking" }}
+  note="Space Grotesk on a near-black ground, with a single signal green. Green means working capital, amber means attention, red means action required. Nothing else competes for your eye."
+  palette={[
+    { name: "Signal green", hex: "#17CFAA", role: "Working capital" },
+    { name: "Amber", hex: "#F79009", role: "Attention" },
+    { name: "Red", hex: "#F04438", role: "Liquidation, loss" },
+    { name: "Background", hex: "#07090D", role: "Page" },
+    { name: "Surface", hex: "#171C26", role: "Cards and panels" },
+  ]}
+  actions={["Add Liquidity", "Cancel"]}
+  sample={{ caption: "Table text at 12px", head: ["Pool", "TVL", "Fee", "APY", "Active bins"], row: ["CED/USDC", "$1.24M", "0.20%", "14.2%*", "82%*"] }}
+  chips={[
+    { label: "Healthy · 1.84", tone: "ok" },
+    { label: "Soft · 1.15", tone: "attention" },
+    { label: "Accelerate", tone: "danger" },
+  ]}
+/>
+
+<Callout kind="a11y" title="Decisions">
+
+- <span aria-hidden className="text-(--cs-accent)">●</span><span>Status is never conveyed by colour alone. Every health state has a label and a glyph as well as a colour.</span>
+- <span aria-hidden className="text-(--cs-accent)">●</span><span>Every table stays legible at 12px.</span>
+- <span aria-hidden className="text-(--cs-accent)">●</span><span>Each colour has exactly one job, so a colour never has to be learned twice.</span>
+
+</Callout>
+
+</Section>
+
+<Section n="06" title="Iteration" headline="Overbuilt the signal layer, then *cut it back.*">
+
+The first version of the Signal layer told users everything. Testing showed that more information wasn't more trust.
+
+<Steps
+  start={4}
+  items={[
+    {
+      title: "Overbuilt the signal layer",
+      body: "The first version surfaced every bin-rebalance event to the user. Early testers ignored most of it.",
+    },
+    {
+      title: "Cut it back, then locked the split",
+      body: "Trimmed to the one trigger that mattered. DLMM, Debt and Signal became separate architectural layers with one shared surface: the version that shipped.",
+    },
+  ]}
+/>
+
+<Statement text="Cut to the *one trigger* that mattered: when a position needs attention." />
+
+</Section>
+
+<Section n="07" title="Outcome" headline="What *shipped.*">
+
+<Metrics
+  items={[
+    {
+      value: 35,
+      suffix: "/35",
+      title: "Screens delivered",
+      label: "Pools, New Pool, Swap, Provide Liquidity, Borrow, Monitor and Portfolio, all production-ready.",
+    },
+    {
+      value: 6,
+      suffix: "×",
+      title: "Empty-state variants",
+      label: "Every surface has a first-use empty state with shimmer skeletons, so a new LP never sees a broken-feeling dashboard before connecting a wallet.",
+    },
+    {
+      value: "1st",
+      title: "DLMM on Move",
+      label: "The first DLMM designed for a Move chain, with lending yield natively integrated into inactive bins.",
+    },
+  ]}
+/>
+
+<Sub kicker="Targets">What “working” means, beyond the design.</Sub>
+
+<Table
+  caption="Targets, not results"
+  head={["Metric", "Why it matters", "Target"]}
+  rows={[
+    ["Capital utilisation", "Share of pooled liquidity earning yield at any given time", "> 85%"],
+    ["90-day LP retention", "Fewer IL-driven withdrawals than a static-range competitor", "> 70%"],
+    ["Fees per $ of TVL", "Fees earned per dollar of TVL, against a standard AMM pool", "2x+"],
+    ["Time to mainnet", "Design-to-ship speed for a three-layer protocol", "12 weeks"],
+  ]}
+/>
+
+</Section>

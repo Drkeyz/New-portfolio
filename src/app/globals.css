@@ -1,0 +1,727 @@
+@import "tailwindcss";
+
+/* Dark mode is class-based (set before paint by the boot script in layout.tsx). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------
+   Tokens
+   paper / ink / muted / line are THEMED: they swap in dark mode.
+   snow / coal / stage / muted-dark are FIXED: used by sections that are
+   always dark (Creative, case studies) or always light.
+   Contrast ratios are measured against the background noted.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-paper: var(--t-paper);
+  --color-ink: var(--t-ink);
+  --color-muted: var(--t-muted);
+  --color-line: var(--t-line);
+
+  --color-snow: #f5f5f2;
+  --color-coal: #0e0e0e;
+  --color-stage: var(--t-stage);
+  --color-muted-dark: #8a8a85; /* on stage ≈ 5.6:1 */
+  --color-brass: #c89b3c; /* on paper ≈ 2.3:1 → decorative only on light; text-safe on dark (≈7.7:1) */
+
+  --font-display: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  --font-grotesk: var(--font-space-grotesk), var(--font-inter-tight), sans-serif;
+
+  --ease-rhythm: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --t-paper: #f5f5f2;
+  --t-ink: #0e0e0e; /* on paper ≈ 18:1 */
+  --t-muted: #6b6b66; /* on paper ≈ 4.9:1 */
+  --t-line: #8a8a85; /* hairlines only */
+  --t-stage: #0b0b0c;
+
+  --beat: 8px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --col-gap: clamp(12px, 1.8vw, 24px);
+  --max: 1280px;
+  --cursor-color: var(--color-ink);
+  --focus: var(--color-ink);
+  color-scheme: light;
+}
+
+:root.dark {
+  --t-paper: #0d0d0e;
+  --t-ink: #edede7; /* on dark paper ≈ 16:1 */
+  --t-muted: #9b9b95; /* on dark paper ≈ 7:1 */
+  --t-line: #5f5f5a;
+  --t-stage: #050506;
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  scroll-padding-top: 88px;
+}
+
+body {
+  background: var(--color-paper);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  transition: background-color 0.4s linear;
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 1.125rem;
+  }
+}
+
+::selection {
+  background: var(--color-brass);
+  color: var(--color-coal);
+}
+
+/* Native scrolling only. Anchor jumps glide unless reduced motion is on. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Focus
+   ------------------------------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+[data-theme="dark"] {
+  --focus: var(--color-snow);
+  --cursor-color: var(--color-brass);
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------
+   Layout primitives
+   ------------------------------------------------------------------ */
+@utility wrap {
+  width: 100%;
+  max-width: calc(var(--max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+
+/* ------------------------------------------------------------------
+   Type scale
+   ------------------------------------------------------------------ */
+@utility t-hero {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.75rem, 6.1vw, 6.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+}
+
+@utility t-mega {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3.5rem, 13vw, 13rem);
+  line-height: 0.84;
+  letter-spacing: -0.05em;
+}
+
+@utility t-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.25rem, 5.2vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+@utility t-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 3.2vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+@utility t-sub {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+@utility t-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@utility t-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------------
+   Reveal system. Visible by default; the `js` class (set before first
+   paint) hides it until RevealObserver adds `in`. Stagger with --d.
+     data-reveal          fade + rise
+     data-reveal="fade"   fade only
+     data-reveal="mask"   child .line rises out of a clip
+     data-reveal="words"  each .w > span rises out of its own clip, in sequence
+     data-reveal="clip"   curtain: the block uncovers bottom → top
+   ------------------------------------------------------------------ */
+.w {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* Room inside the clip for descenders (g, y) at tight line-heights and for
+     the overhang of italic accents (?, f); the negative margins cancel it out,
+     so layout is unchanged. */
+  padding-bottom: 0.24em;
+  margin-bottom: -0.24em;
+  padding-inline-end: 0.12em;
+  margin-inline-end: -0.12em;
+}
+.w > span {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+    transition:
+      opacity 1s var(--ease-rhythm),
+      transform 1.2s var(--ease-expo);
+    transition-delay: calc(var(--d, 0) * 80ms);
+  }
+  .js [data-reveal="fade"] {
+    transform: none;
+  }
+  .js [data-reveal].in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js [data-reveal="mask"],
+  .js [data-reveal="words"],
+  .js [data-reveal="clip"] {
+    opacity: 1;
+    transform: none;
+  }
+  .js [data-reveal="mask"] > .line {
+    display: block;
+    transform: translate3d(0, 105%, 0);
+    transition: transform 1.2s var(--ease-expo);
+    transition-delay: calc(var(--d, 0) * 80ms);
+  }
+  .js [data-reveal="mask"].in > .line {
+    transform: none;
+  }
+
+  .js [data-reveal="words"] .w > span {
+    transform: translate3d(0, 110%, 0) rotate(4deg);
+    transform-origin: 0 100%;
+    transition: transform 1.1s var(--ease-expo);
+    transition-delay: calc((var(--d, 0) + var(--i, 0)) * 45ms);
+  }
+  .js [data-reveal="words"].in .w > span {
+    transform: none;
+  }
+
+  /* The clip goes on the child: a fully clipped observed element never
+     "intersects", so it would never reveal (or lazy-load its image). */
+  .js [data-reveal="clip"] > * {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1.4s var(--ease-expo);
+    transition-delay: calc(var(--d, 0) * 80ms);
+  }
+  .js [data-reveal="clip"].in > * {
+    clip-path: inset(0 0 0 0);
+  }
+  .js [data-reveal="clip"] .clip-zoom {
+    transform: scale(1.15);
+    transition: transform 1.8s var(--ease-expo);
+  }
+  .js [data-reveal="clip"].in .clip-zoom {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 0;
+    transition: opacity 0.4s linear;
+  }
+  .js [data-reveal].in {
+    opacity: 1;
+  }
+}
+
+.mask-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* ------------------------------------------------------------------
+   Load sequence (CSS only, ≈1.5s, once per session):
+   name rises in beats, a brass line keeps time, then the panel lifts away.
+   ------------------------------------------------------------------ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: var(--color-coal);
+  color: var(--color-snow);
+  pointer-events: none;
+  animation: intro-lift 0.9s var(--ease-expo) 1.25s forwards;
+}
+.intro .beat {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.intro .beat > span {
+  display: inline-block;
+  transform: translate3d(0, 105%, 0);
+  animation:
+    rise 0.7s var(--ease-expo) forwards,
+    sink 0.5s var(--ease-rhythm) 1.05s forwards;
+  animation-delay: calc(var(--d) * 120ms), 1.05s;
+}
+.intro .tempo {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--color-brass);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  animation: tempo 1.2s var(--ease-rhythm) forwards;
+}
+.intro-seen .intro {
+  display: none;
+}
+@keyframes rise {
+  to {
+    transform: none;
+  }
+}
+@keyframes sink {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translate3d(0, -105%, 0);
+  }
+}
+@keyframes tempo {
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes intro-lift {
+  to {
+    transform: translate3d(0, -100%, 0);
+    visibility: hidden;
+  }
+}
+
+/* Hero entrance timing: waits for the intro on first visit. */
+:root {
+  --hero-delay: 1.55s;
+}
+.intro-seen {
+  --hero-delay: 0.15s;
+}
+.unmask {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .unmask > .unmask-outer {
+    transform: translate3d(0, 100%, 0);
+    animation: rise 1.6s var(--ease-expo) var(--hero-delay) forwards;
+  }
+  .unmask > .unmask-outer > .unmask-inner {
+    transform: translate3d(0, -100%, 0) scale(1.25);
+    animation: unscale 2.2s var(--ease-expo) var(--hero-delay) forwards;
+  }
+  .hero-word > span {
+    display: inline-block;
+    transform: translate3d(0, 110%, 0) rotate(6deg);
+    transform-origin: 0 100%;
+    animation: rise 1.2s var(--ease-expo) forwards;
+    animation-delay: calc(var(--hero-delay) + var(--d, 0) * 70ms);
+  }
+  .hero-in {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    animation: hero-in 1s var(--ease-expo) forwards;
+    animation-delay: calc(var(--hero-delay) + var(--d, 0) * 70ms);
+  }
+}
+@keyframes unscale {
+  to {
+    transform: none;
+  }
+}
+@keyframes hero-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Route change: a curtain lifts off the new page.
+   ------------------------------------------------------------------ */
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: var(--color-coal);
+  pointer-events: none;
+  transform: translate3d(0, 100%, 0);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .curtain.play {
+    animation: curtain 1s var(--ease-expo) forwards;
+  }
+}
+@keyframes curtain {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Theme switch: the new theme grows out of the toggle as a circle.
+   ------------------------------------------------------------------ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------------
+   Links
+   ------------------------------------------------------------------ */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 100% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.6s var(--ease-expo);
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1px;
+  background-position: 0 100%;
+}
+
+/* Custom cursor: native cursor hidden only while the custom one is active. */
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}
+.has-cursor input,
+.has-cursor textarea,
+.has-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Stage photo grade: pulls saturated stage light toward charcoal + brass. */
+.stage-grade {
+  filter: grayscale(0.82) brightness(0.72) contrast(1.08);
+}
+/* A lighter version for the photography grid: same family, more of the original. */
+.photo-grade {
+  filter: grayscale(0.72) brightness(0.8) contrast(1.06);
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+}
+
+/* Creative intro text: dark while the stage is still light, light once it's mostly dark. */
+[data-stage] {
+  --stage-fg: var(--color-ink);
+}
+[data-stage][data-lit="true"] {
+  --stage-fg: var(--color-snow);
+}
+
+/* ------------------------------------------------------------------
+   Case studies: display font and palette come from frontmatter.
+   ------------------------------------------------------------------ */
+.cs-display {
+  font-family: var(--cs-font, var(--font-display));
+}
+.cs-headline .t-accent {
+  color: var(--cs-accent);
+}
+
+/* Story flow: running text sits in a reading column (cols 4–10); blocks opt
+   into wider spans with data-span. Gives every section the same pulse:
+   narrow text, wide picture, narrow text. */
+.case-flow {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  row-gap: 2.25rem;
+}
+.case-flow > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .case-flow {
+    row-gap: 2.75rem;
+  }
+  .case-flow > * {
+    grid-column: 4 / span 7;
+  }
+  .case-flow > [data-span="lead"] {
+    grid-column: 1 / span 10;
+  }
+  .case-flow > [data-span="mid"] {
+    grid-column: 2 / span 10;
+  }
+  .case-flow > [data-span="wide"],
+  .case-flow > [data-span="bleed"] {
+    grid-column: 1 / -1;
+  }
+  /* A pause before a new beat. */
+  .case-flow > [data-span="wide"],
+  .case-flow > [data-span="bleed"],
+  .case-flow > [data-span="mid"] {
+    margin-block: 2.5rem;
+  }
+}
+/* Out to the viewport edges, whatever the wrap width. */
+.case-flow > [data-span="bleed"] {
+  margin-inline: calc((min(100vw - 2 * var(--gutter), var(--max)) - 100vw) / 2);
+}
+.case-flow > p {
+  max-width: 62ch;
+  color: var(--cs-muted);
+}
+.case-flow > p strong {
+  font-weight: 500;
+  color: var(--cs-text);
+}
+.case-flow a:not([class]) {
+  color: var(--cs-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* UI screenshots: a hairline and a small radius, nothing heavier. The stroke
+   is drawn inside the frame (::after), so reveal clips can't cut it off and
+   every screen gets the same edge. Override with --screen-stroke. */
+@layer components {
+  .screen {
+    --screen-stroke: var(--cs-stroke, rgba(245, 245, 242, 0.16));
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--cs-surface);
+  }
+  .screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px var(--screen-stroke);
+    pointer-events: none;
+  }
+}
+
+@layer components {
+  @media (max-width: 767px) {
+    .screen {
+      border-radius: 6px;
+    }
+  }
+}
+
+/* Phone: CSS hardware around a flat screen export. Scales with its own width. */
+@layer components {
+  .phone {
+    container-type: inline-size;
+  }
+  .phone-body {
+    padding: 2.6cqw;
+    border-radius: 15.5cqw;
+    background: linear-gradient(160deg, #3a3e46, #111215 45%, #22252b);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+      0 40px 80px -40px rgba(0, 0, 0, 0.55);
+  }
+  .phone-screen {
+    position: relative;
+    overflow: hidden;
+    border-radius: 13cqw;
+    background: #fff;
+    /* Safari: keep the radius when children are transformed */
+    isolation: isolate;
+  }
+
+  /* Browser window around a page screenshot. */
+  .browser {
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--cs-surface, #fff);
+    box-shadow: 0 0 0 1px var(--cs-stroke, rgba(245, 245, 242, 0.16));
+  }
+  .browser-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 2.75rem;
+    padding-inline: 1rem;
+    background: var(--cs-surface, #f1f1f1);
+    border-bottom: 1px solid var(--cs-stroke, rgba(0, 0, 0, 0.08));
+  }
+  .browser-url {
+    flex: 1;
+    max-width: 26rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border-radius: 999px;
+    background: var(--cs-bg, #fff);
+    padding: 0.3rem 0.9rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--cs-muted, #666);
+  }
+}
+
+/* BrowserTabs invitation: a light passes across the tabs, one after another,
+   like a cursor trying each; the hint arrow bobs toward them. Stops on the
+   first interaction (the class is removed). */
+@media (prefers-reduced-motion: no-preference) {
+  .tabs-invite .tab-btn[aria-selected="false"] {
+    animation: tab-scan 4.5s var(--ease-rhythm) infinite;
+    animation-delay: calc(1.2s + var(--i, 0) * 0.45s);
+  }
+  .tabs-invite .tabs-hint-arrow {
+    animation: hint-bob 1.4s var(--ease-rhythm) infinite;
+  }
+}
+@keyframes tab-scan {
+  0%,
+  22%,
+  100% {
+    background-color: transparent;
+    color: var(--cs-muted);
+  }
+  8%,
+  14% {
+    background-color: color-mix(in srgb, var(--cs-accent) 14%, transparent);
+    color: var(--cs-text);
+  }
+}
+@keyframes hint-bob {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* Cells in a hairline grid: the cell (and its background) stays put, only
+   its contents fade in, so the grid lines never show through. */
+.js [data-reveal="cell"] {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="cell"] > * {
+  opacity: 0;
+  transition: opacity 0.4s linear;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal="cell"] > * {
+    transform: translate3d(0, 24px, 0);
+    transition:
+      opacity 1s var(--ease-rhythm),
+      transform 1.2s var(--ease-expo);
+    transition-delay: calc(var(--d, 0) * 80ms);
+  }
+}
+.js [data-reveal="cell"].in > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* Bin diagram: bars grow from the baseline in sequence. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal="bins"] {
+    opacity: 1;
+    transform: none;
+  }
+  .js [data-reveal="bins"] .bar {
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    transition: transform 0.9s var(--ease-expo);
+    transition-delay: calc(var(--i, 0) * 22ms + var(--d, 0) * 200ms);
+  }
+  .js [data-reveal="bins"].in .bar {
+    transform: none;
+  }
+}
+
+/* The piano dock rises above the case-study index while that is showing. */
+@media (min-width: 768px) {
+  .piano-dock {
+    transition: bottom 0.5s var(--ease-rhythm);
+  }
+  html[data-case-index] .piano-dock {
+    bottom: 5.25rem;
+  }
+}

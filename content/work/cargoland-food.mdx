@@ -1,0 +1,303 @@
+export const frontmatter = {
+  title: "Cargolandfood.",
+  titleAccent: "Everything you need, in one app.",
+  intro:
+    "A Nigerian-built marketplace where consumers, businesses and riders order, sell and deliver. Designed end to end for all three, after research with all three.",
+  meta: [
+    { label: "Role", value: "Lead Product Designer · UX research lead" },
+    { label: "Timeline", value: "March–June 2025" },
+    { label: "Scope", value: "3 user types · 100+ mobile screens · design system" },
+    { label: "Market", value: "Lagos and Abuja, 5 cities planned" },
+  ],
+  hero: {
+    src: "/images/cargoland/cover.png",
+    alt: "Three Cargolandfood screens held in hand: markets, the home feed with a special offer and hot picks, and a drinks listing",
+    width: 2880,
+    height: 1723,
+    label: "Cargolandfood — consumer app",
+  },
+  // Screen recording of the consumer app (no sound). Original .mov in /media-source.
+  video: {
+    src: "/video/cargoland-walkthrough.mp4",
+    embed: null,
+    captions: null,
+    title: "Cargolandfood app walkthrough",
+    duration: "1:57",
+    width: 592,
+    height: 1280,
+  },
+  glance: [
+    {
+      label: "The problem",
+      body: "Food, groceries, pharmacy runs and drinks happen in the same week, yet Nigerians juggle five apps that each port a global playbook.",
+    },
+    {
+      label: "The bet",
+      body: "Not another food app: a neighbourhood marketplace, food-first, built for three sides at once.",
+    },
+    {
+      label: "My role",
+      body: "Lead product designer and UX research lead, from interviews and strategy through flows, visual design, testing and implementation.",
+    },
+    {
+      label: "The outcome",
+      body: "A three-sided ecosystem in light and dark. The consumer app is live on Google Play.",
+    },
+  ],
+  theme: {
+    bg: "#FBF6F1",
+    surface: "#F3E8DE",
+    text: "#1E140E",
+    muted: "#6B5A4E",
+    line: "#E6D8CC",
+    accent: "#C2410C",
+    attention: "#B45309",
+    danger: "#B91C1C",
+    dark: false,
+    font: "display",
+  },
+};
+
+<Section n="01" title="Context" headline="Why use five apps *when one will do?*">
+
+<Lead>Cargolandfood entered a market already crowded with food delivery: Jumia Food, Chowdeck, Glovo, UberEats, Bolt Food.</Lead>
+
+Most of them ported global playbooks into Nigeria with little local adaptation, and none solved for the daily reality that **food, groceries, pharmacy runs and drinks all happen in the same week**.
+
+So the brief wasn't to design another food app. It was a **complete neighbourhood marketplace**: food-first, but reaching into everything Nigerians actually order each week.
+
+<Statement text="Built for foodies who need *everything,* not shoppers who want food." cite="Cargolandfood's positioning" />
+
+</Section>
+
+<Section n="02" title="Problem" headline="One marketplace, *three* broken experiences.">
+
+<Lead>The market was fragmented, unreliable and inefficient for every side of it at once.</Lead>
+
+Designing for one side meant designing for all three in parallel. Customers want speed and reliability, restaurant partners need order management and growth, and riders need transparent earnings and efficient routes. Each group has its own pain points, mental model and definition of success.
+
+<Findings
+  items={[
+    {
+      title: "Hidden fees at checkout.",
+      body: "Users kept describing price jumps between cart and final total. Fees appeared as vaguely named line items, so comparing apps before paying was nearly impossible.",
+    },
+    {
+      title: "Inconsistent food quality.",
+      body: "Nothing reliably separated great vendors from mediocre ones once an order left the kitchen. Reviews skewed toward extreme experiences, not the typical one.",
+    },
+    {
+      title: "Long delivery at peak hours.",
+      body: "Lagos peak hours stretched 30-minute estimates into 90-minute waits. Users wanted realistic ETAs, not optimistic ones, and live updates when things changed.",
+    },
+    {
+      title: "Slow, scattered restaurant onboarding.",
+      body: "Partners described 2–3 weeks before going live, with documents, menu setup and verification spread across email, calls and broken portals.",
+    },
+    {
+      title: "Unclear rider earnings.",
+      body: "Riders couldn't predict a day's income. Trip rates, distance bonuses and tips arrived bundled in a weekly settlement, with no breakdown by trip.",
+    },
+  ]}
+/>
+
+<Lead>The answer, side by side: transparent pricing, vendor quality signals, ETAs that update mid-trip, single-flow restaurant onboarding, and a per-trip earnings ledger for riders.</Lead>
+
+</Section>
+
+<Section n="03" title="Research" headline="Designing for the *three sides* of one marketplace.">
+
+Online and in-person interviews with all three groups, plus business research and a competitive audit.
+
+<Columns
+  items={[
+    {
+      label: "18–45 · Urban and suburban Nigeria",
+      title: "Customers",
+      need: "Convenience and quality, without surprises.",
+      body: "Middle to upper-middle class, heavy smartphone users. Time-conscious, social, price-sensitive, but willing to pay for quality. Strongly influenced by reviews.",
+    },
+    {
+      label: "Small eateries → established chains",
+      title: "Restaurant partners",
+      need: "Growth, without the logistics.",
+      body: "Growth-oriented owners with varying digital readiness. They need order management, delivery handled for them, marketing support and real analytics.",
+    },
+    {
+      label: "18–35 · Students and gig workers",
+      title: "Delivery riders",
+      need: "Earnings they can predict.",
+      body: "Flexible income, transparent pay, reliable tools and efficient routes. Most of their work happens at peak hours.",
+    },
+  ]}
+/>
+
+<Sub kicker="Competitive audit">Every competitor left a gap the marketplace could fill.</Sub>
+
+The audit covered customer experience, partner tooling, rider experience and business model. Three patterns kept appearing: **food-only focus**, **high commission rates**, and **poor local-market intelligence**.
+
+<Columns
+  items={[
+    {
+      label: "Market leader",
+      title: "Jumia Food",
+      need: "Slow, and split across apps.",
+      body: "45–60 minute deliveries, 20–25% commission, separate food and grocery apps. E-commerce first, food second.",
+    },
+    {
+      label: "Strongest local",
+      title: "Chowdeck",
+      need: "Food only.",
+      body: "Limited tech features, basic restaurant tools, and no expansion into daily essentials.",
+    },
+    {
+      label: "International",
+      title: "Glovo",
+      need: "Not built for Nigeria.",
+      body: "25–30% commission, limited local-market understanding, and missing local markets and vendors.",
+    },
+    {
+      label: "Global benchmark",
+      title: "UberEats",
+      need: "No pharmacy, no markets.",
+      body: "Food-only focus, high pricing, and limited investment in African markets.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section n="04" title="Thinking" headline="A double diamond, in *three movements.*">
+
+The double diamond (empathise, define, ideate, prototype, test, implement) gave the team and stakeholders a shared language for every checkpoint. The project moved through it in three movements.
+
+<Steps
+  items={[
+    {
+      title: "Concept: research and strategy",
+      body: "Interviews with customers, restaurant partners and riders, business research, the competitive audit, and aligning stakeholders on product goals.",
+    },
+    {
+      title: "MVP: flows and visual design",
+      body: "User flows for all three sides, then the visual language and a shared component library, with distinct interaction patterns per audience.",
+    },
+    {
+      title: "Final product: polish and testing",
+      body: "Interaction polish, usability testing and design iterations, then monitoring implementation so the decisions shipped as designed.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section n="05" title="Design" headline="Fast enough to keep *hungry* users.">
+
+<Sub kicker="Onboarding">The bare minimum, and nothing more.</Sub>
+
+Onboarding is the first contact with the product, so it carries the value proposition and gets out of the way. Three illustrated screens set expectations, then sign-up asks only for what a first order needs, with the address chosen in one tap from your current location. Guests can skip straight in.
+
+<PhoneLineup
+  items={[
+    { src: "/images/cargoland/onboard-1.png", width: 591, height: 1280, alt: "Onboarding: All your favorites, with a man holding a grocery bag", label: "All your favourites" },
+    { src: "/images/cargoland/onboard-2.png", width: 591, height: 1280, alt: "Onboarding: order from your chosen chef, with a man holding a phone and food boxes", label: "Your chosen chef" },
+    { src: "/images/cargoland/onboard-3.png", width: 591, height: 1280, alt: "Onboarding: free delivery offers, with a rider in a helmet, Get Started and Continue as guest", label: "Free delivery" },
+    { src: "/images/cargoland/onboard-4.png", width: 591, height: 1280, alt: "Create an account: phone number, email, full name and optional referral code, with Google, Facebook and Apple sign-in", label: "Sign up" },
+    { src: "/images/cargoland/onboard-5.png", width: 591, height: 1280, alt: "Select address: use current location or set it from the map", label: "Set your address" },
+  ]}
+/>
+
+<Sub kicker="Make an order">From browse to checkout in five clear steps.</Sub>
+
+Home, restaurant, filter, checkout, confirmation: one linear flow, every step designed for thumb reach on a six-inch screen. Payment collapses into a single sheet, and the address is reused from onboarding, so nobody types it twice.
+
+<Figure
+  src="/images/cargoland/order-flow.jpg"
+  width={2620}
+  height={1300}
+  alt="The order flow: home feed, Shawarma Plus+ menu, filter sheet, checkout with wallet balance and totals, and the order placed confirmation"
+  caption="Home → Restaurant → Filter → Checkout → Confirmation."
+/>
+
+<Sub kicker="Track an order">Live tracking that earns trust.</Sub>
+
+Tracking answers the four questions people actually have, in the order they have them.
+
+<PhoneNotes
+  screen={{ src: "/images/cargoland/track-3.png", width: 591, height: 1279, alt: "Live tracking: a map with the rider's route, a 20 minute estimate, the rider's card with message and call buttons" }}
+  notes={[
+    { x: 83, y: 53, title: "Where is my food?", body: "A live map follows the rider along the real delivery route, not a straight line." },
+    { x: 8, y: 80, title: "When will it arrive?", body: "A realistic estimate that updates when things change, the answer to Lagos peak-hour waits." },
+    { x: 12, y: 71, title: "Who is bringing it?", body: "The rider's name and photo, so the handoff at the door is easy." },
+    { x: 89, y: 71, title: "How do I reach them?", body: "Message or call in one tap, without leaving the screen." },
+  ]}
+/>
+
+Status updates fire on real events (preparing, on the way, delivered), and the Orders tab keeps a full history with one-tap reorder.
+
+<PhoneLineup
+  items={[
+    { src: "/images/cargoland/track-1.png", width: 591, height: 1279, alt: "Orders, current: an order out for delivery with Track Order", label: "Current order" },
+    { src: "/images/cargoland/track-4.png", width: 591, height: 1277, alt: "Tracking details: preparing, on the way, delivered, delivery address and amount paid", label: "Order status" },
+    { src: "/images/cargoland/track-5.png", width: 591, height: 1279, alt: "Calling the rider, Precious Eric, with mute, end and speaker controls", label: "Call the rider" },
+    { src: "/images/cargoland/track-2.png", width: 591, height: 1277, alt: "Orders, previous: delivered orders, each with Reorder", label: "Reorder" },
+  ]}
+/>
+
+<Sub kicker="The system">100+ screens. Two themes. One system.</Sub>
+
+Cart, favourites, coupons, biometric sign-in, empty states, restaurant pages, the drinks and market verticals: each ships in light and dark from the same component library. Dark mode isn't an inversion. It was tuned for low light, with deeper contrast on actions and softer surfaces everywhere else.
+
+<ScrollPan
+  src="/images/cargoland/gallery.jpg"
+  width={2600}
+  height={3576}
+  alt="A collage of about thirty Cargolandfood screens: dark-mode sign-in, verification, tracking, restaurants, groceries, drinks and markets, and light-mode filter, cancel order, addresses, cart, favourites, loyalty points, face recognition, profile and chat"
+  caption="Dark mode above, light mode below: the same components, tuned for each."
+/>
+
+</Section>
+
+<Section n="06" title="Iteration" headline="Tested, then *tuned* to how people use it.">
+
+<Steps
+  items={[
+    {
+      title: "Three filters, up front",
+      body: "Testing showed people really used three filters: sort, restaurant and delivery fee. Those now lead the filter sheet, and everything else waits below.",
+    },
+    {
+      title: "Dark mode, tuned for real conditions",
+      body: "Riders confirm orders at night and customers check ETAs in dim restaurants, so the dark theme got deeper contrast on actions rather than a simple colour flip.",
+    },
+  ]}
+/>
+
+</Section>
+
+<Section n="07" title="Outcome" headline="What *shipped.*">
+
+<Metrics
+  items={[
+    {
+      value: 3,
+      suffix: "×",
+      title: "Three-sided ecosystem",
+      label: "Customer, restaurant partner and rider apps, designed end to end with shared design tokens and distinct patterns per audience.",
+    },
+    {
+      value: 100,
+      suffix: "+",
+      title: "Screens, light and dark",
+      label: "Onboarding, ordering, tracking, profile, wallet, vendor verticals, and empty and error states for every primary surface.",
+    },
+    {
+      value: "20–30",
+      title: "Minute delivery target",
+      label: "Designed against a 20–30 minute target, about half of incumbents' 45–60, so speed signals beat decoration on every screen.",
+    },
+  ]}
+/>
+
+<Lead wide>The consumer app is live on Google Play, with a design system built to scale to the vendor and rider apps.</Lead>
+
+</Section>
