@@ -130,6 +130,21 @@ export function FeatureReveal({ project }: { project: Project }) {
               </h3>
               <div className="relative z-10 md:col-span-4 md:col-start-9">
                 <p className="t-sub text-pretty">{project.oneLiner}</p>
+                {project.results && (
+                  <dl className="mt-6 grid grid-cols-3 gap-x-4 border-t border-white/15 pt-4">
+                    {project.results.map((r) => (
+                      <div key={r.label}>
+                        <dt className="sr-only">{r.label}</dt>
+                        <dd className="font-display text-[clamp(1.5rem,2.2vw,2.25rem)] font-semibold leading-none tracking-[-0.04em] tabular-nums" style={{ color: project.theme.accent }}>
+                          {r.value}
+                        </dd>
+                        <dd aria-hidden className="mt-2 text-pretty text-[0.75rem] leading-snug text-muted-dark">
+                          {r.label}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
                 <p className="mt-4 text-[0.9375rem] text-muted-dark">{project.capabilities.join(" · ")}</p>
                 <span
                   aria-hidden

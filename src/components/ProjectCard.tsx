@@ -71,6 +71,22 @@ export function ProjectCard({ project }: { project: Project }) {
 
         <div className={full ? "md:col-span-4 md:col-start-5 md:pt-10" : ""} data-reveal style={{ "--d": 3 } as React.CSSProperties}>
           <p className="mt-5 max-w-[38ch] text-pretty">{project.description}</p>
+          {project.results && (
+            <dl className="mt-8 grid max-w-[30rem] grid-cols-3 gap-x-5 border-t border-line/40 pt-5">
+              {project.results.map((r) => (
+                <div key={r.label}>
+                  <dt className="sr-only">{r.label}</dt>
+                  <dd className="font-display text-[clamp(1.75rem,2.6vw,2.5rem)] font-semibold leading-none tracking-[-0.04em] tabular-nums">
+                    {r.value}
+                  </dd>
+                  <dd aria-hidden className="mt-2 text-pretty text-[0.8125rem] leading-snug text-muted">
+                    {r.label}
+                    {r.target && <span className="text-ink"> (target)</span>}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )}
         </div>
 
         <div className={full ? "md:col-span-4 md:col-start-9 md:pt-10" : ""} data-reveal style={{ "--d": 5 } as React.CSSProperties}>

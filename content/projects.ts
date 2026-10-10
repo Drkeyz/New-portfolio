@@ -49,6 +49,12 @@ export type Project = {
   media: Media;
   theme: ProjectTheme;
   caseStudy: boolean;
+  /**
+   * Headline figures for the home page card. Only facts already stated in the
+   * case study: delivery results, never invented business metrics. Mark goals
+   * with `target: true` so they're labelled as targets, not outcomes.
+   */
+  results?: { value: string; label: string; target?: boolean }[];
   /** Short factual highlights (sourced from drkeyz.com case studies). */
   highlights?: string[];
   /** Open questions, shown only in development. */
@@ -76,6 +82,11 @@ export const projects: Project[] = [
       { label: "Launch app", href: "https://app.juncta.xyz" },
     ],
     layout: "lead",
+    results: [
+      { value: "35", label: "production-ready screens" },
+      { value: "17 wks", label: "from research to a full design system" },
+      { value: "1st", label: "DLMM designed for a Move chain" },
+    ],
     media: {
       src: "/images/juncta/pools.png",
       alt: "Juncta pools dashboard: total value locked, lending supplied, top pools table and protocol overview",
@@ -102,6 +113,11 @@ export const projects: Project[] = [
     links: [{ label: "cargolandfood.com", href: "https://www.cargolandfood.com" }],
     highlights: ["100+ screens", "3 user types", "Consumer app, merchant dashboard, rider app"],
     layout: "offset",
+    results: [
+      { value: "100+", label: "screens, in light and dark" },
+      { value: "3", label: "sides of the marketplace designed for" },
+      { value: "Live", label: "consumer app on Google Play" },
+    ],
     media: {
       src: "/images/cargoland/cover.png",
       alt: "Three Cargoland Food app screens held in hand: markets, home with categories and featured food, and a drinks listing",
@@ -131,6 +147,11 @@ export const projects: Project[] = [
     links: [],
     highlights: ["5 core modules", "40+ screens", "3 user roles"],
     layout: "full",
+    results: [
+      { value: "5", label: "HR modules unified in one app" },
+      { value: "3", label: "user roles served" },
+      { value: "40+", label: "production screens" },
+    ],
     media: {
       src: "/images/orgsphere/cover.png",
       alt: "Orgsphere case study cover: an activities list, the employee home with today's overview and recent leave requests, and all leaves, on a dark puzzle-pattern background",
@@ -160,6 +181,11 @@ export const projects: Project[] = [
     links: [],
     highlights: ["30+ dashboard screens", "Admin + Super-admin views"],
     layout: "split",
+    results: [
+      { value: "30+", label: "dashboard screens" },
+      { value: "8", label: "surfaces in one workspace" },
+      { value: "2", label: "dashboard views, Admin and Super-admin" },
+    ],
     media: {
       src: "/images/helpnest/cover.png",
       alt: "Helpnest admin dashboard: total conversations, bot resolved, satisfaction rate, escalations, response time, active chats and a seven-day conversation volume chart",
